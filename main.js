@@ -9,12 +9,28 @@ const champList = [
   "Rengar",
 ];
 
-const randomChamps = [];
+console.log("Deine Random Champs sind:");
 
 for (let i = 1; i <= 3; i++) {
   let randomNumber = null;
   randomNumber = Math.floor(Math.random() * champList.length);
   console.log(champList[randomNumber]);
+}
+
+const stats = [
+  ["AD/AP", "Attack Speed", "Ability Haste"],
+  ["AD/AP", "Armor", "Magic Resist"],
+  ["Life", "Armor", "Magic Resist"],
+];
+
+const randomStats = [];
+
+for (let i = 1; i <= 3; i++) {
+  let randomNumberOne = null;
+  randomNumberOne = Math.floor(Math.random() * 3);
+  let randomNumberTwo = null;
+  randomNumberTwo = Math.floor(Math.random() * 3);
+  console.log(stats[randomNumberOne][randomNumberTwo]);
 }
 
 const Trees = {
@@ -40,12 +56,6 @@ const Trees = {
     thirdMinorRune: ["Hitzewelle", "Wasserlauf", "Aufziehender Sturm"],
   },
 };
-
-const stats = [
-  ["AD/AP", "Attack Speed", "Ability Haste"],
-  ["AD/AP", "Armor", "Magic Resist"],
-  ["Life", "Armor", "Magic Resist"],
-];
 
 const randomMainTree = {
   keyRune: "",
