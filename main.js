@@ -9,6 +9,14 @@ const champList = [
   "Rengar",
 ];
 
+const randomChamps = [];
+
+for (let i = 1; i <= 3; i++) {
+  let randomNumber = null;
+  randomNumber = Math.floor(Math.random() * champList.length);
+  console.log(champList[randomNumber]);
+}
+
 const Trees = {
   Präzision: {
     keyRune: [
