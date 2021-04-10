@@ -9,69 +9,47 @@ const champList = [
   "Rengar",
 ];
 
-const runes = [
-  [
-    [1, 2, 3, 4],
-    [1, 2, 3],
-    [1, 2, 3],
-    [1, 2, 3],
-  ],
-  [
-    [1, 2, 3, 4],
-    [1, 2, 3],
-    [1, 2, 3],
-    [1, 2, 3],
-  ],
-  [
-    [1, 2, 3],
-    [1, 2, 3],
-    [1, 2, 3],
-    [1, 2, 3],
-  ],
-  [
-    [1, 2, 3],
-    [1, 2, 3],
-    [1, 2, 3],
-    [1, 2, 3],
-  ],
-  [
-    [1, 2, 3],
-    [1, 2, 3],
-    [1, 2, 3],
-    [1, 2, 3],
-  ],
-];
+const Trees = {
+  Präzision: {
+    keyRune: [
+      "Fokusierter Angriff",
+      "Tödliches Tempo",
+      "Leichtfüssigkeit",
+      "Eroberer",
+    ],
+    firstMinorRune: ["Überheilen", "Triumph", "Geistesgegenwart"],
+    secondMinorRune: [
+      "Legende: Eifer",
+      "Legende: Zähigkeit",
+      "Legende: Blutdurst",
+    ],
+    thirdMinorRune: ["Gnadentoss", "Niedermäher", "Letztes Gefecht"],
+  },
+  Zauberei: {
+    keyRune: ["Benefee Beschwörung", "Akaner Komet", "Phasenrausch"],
+    firstMinorRune: ["Kugel der Aufhebung", "Manafluss", "Nimbus-Umhang"],
+    secondMinorRune: ["Überlegenheit", "Flinkheit", "Absuluter Fokus"],
+    thirdMinorRune: ["Hitzewelle", "Wasserlauf", "Aufziehender Sturm"],
+  },
+};
 
 const stats = [
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
+  ["AD/AP", "Attack Speed", "Ability Haste"],
+  ["AD/AP", "Armor", "Magic Resist"],
+  ["Life", "Armor", "Magic Resist"],
 ];
 
-const randomRunes = {
-  mainTree: "Dominaz",
-  mainTreeRunes: {
-    keyRune: "",
-    firstMinorRune: "",
-    secondMinorRune: "",
-    thirdMinorRune: "",
-  },
-  offTree: "Zauberei",
-  offTreeRunes: {
-    firstMinorRune: "",
-    secondMinorRune: "",
-  },
-  stats: {
-    firstStat: "",
-    secondStat: "",
-    thirdStat: "",
-  },
+const randomMainTree = {
+  keyRune: "",
+  firstMinorRune: "",
+  secondMinorRune: "",
+  thirdMinorRune: "",
+};
+const randomSubTree = {
+  firstMinorRune: "",
+  secondMinorRune: "",
 };
 
 const firstChamp = Math.floor(Math.random() * champList.length);
 const secondChamp = Math.floor(Math.random() * champList.length);
 const thirdChamp = Math.floor(Math.random() * champList.length);
-
-function rng() {
-  return Math.floor(Math.random() * this.length);
-}
