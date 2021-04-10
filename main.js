@@ -57,7 +57,3 @@ const randomSubTree = {
   firstMinorRune: "",
   secondMinorRune: "",
 };
-
-const firstChamp = Math.floor(Math.random() * champList.length);
-const secondChamp = Math.floor(Math.random() * champList.length);
-const thirdChamp = Math.floor(Math.random() * champList.length);
