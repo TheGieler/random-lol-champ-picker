@@ -62,10 +62,8 @@ const stats = [
 
 console.log("Deine Random Stats sind:");
 
-for (let i = 1; i <= 3; i++) {
-  let randomNumberOne = null;
-  randomNumberOne = Math.floor(Math.random() * 3);
-  let randomNumberTwo = null;
-  randomNumberTwo = Math.floor(Math.random() * 3);
-  console.log(stats[randomNumberOne][randomNumberTwo]);
+for (let i = 0; i <= 2; i++) {
+  let randomNumber = null;
+  randomNumber = Math.floor(Math.random() * 3);
+  console.log(stats[i][randomNumber]);
 }
