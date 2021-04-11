@@ -155,6 +155,9 @@ for (const [index, chosenRuneTree] of chosenRuneTrees.entries()) {
   const runes = isPrimary
     ? chosenRuneTree.rows
     : chosenRuneTree.rows.slice(1, 4);
+  if (!isPrimary) {
+    runes.splice(randomBetween(0, 2), 1);
+  }
   selectRunes(runesToUse, runes);
 
   console.log(
