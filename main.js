@@ -34,13 +34,14 @@ const Trees = [
 
 console.log("Das sind deine Runen:");
 
-let randomMain = null;
-randomMain = Math.floor(Math.random() * Trees.length);
+let randomMainTree = null;
+randomMainTree = Math.floor(Math.random() * Trees.length);
 
 for (let i = 0; i <= 3; i++) {
-  randomMainMinor = null;
-  randomMainMinor = Math.floor(Math.random() * 3);
-  console.log(Trees[randomMain][i][randomMainMinor]);
+  randomMainRune = null;
+  runeLenght = Trees[randomMainTree][i].length;
+  randomMainRune = Math.floor(Math.random() * runeLenght);
+  console.log(Trees[randomMainTree][i][randomMainRune]);
 }
 
 console.log("Das sind deine Subrunen:");
