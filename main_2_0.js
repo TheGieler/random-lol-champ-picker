@@ -46,3 +46,9 @@ const runeTrees = [
     ],
   },
 ];
+
+const stats = [
+  ["A", "B", "C"],
+  ["A", "B", "C"],
+  ["A", "B", "C"],
+];
