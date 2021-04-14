@@ -20,9 +20,7 @@ const champsList = [
 const randomChamps = [];
 
 for (let i = 1; i <= 3; i++) {
-  let champName = champsList[randomNumber(champsList)].name;
-  randomChamps.push(champName);
-  console.log(randomChamps);
+  randomChampPicker(randomChamps);
 }
 
 const runeTrees = [
@@ -60,6 +58,15 @@ const stats = [
   ["A", "B", "C"],
   ["A", "B", "C"],
 ];
+
+function randomChampPicker(arr) {
+  let randomChamp = champsList[randomNumber(champsList)].name;
+  if (arr.includes(randomChamp)) {
+    randomChampPicker(randomChamps);
+  } else {
+    randomChamps.push(randomChamp);
+  }
+}
 
 function randomNumber(arr) {
   return Math.floor(Math.random() * arr.length);
