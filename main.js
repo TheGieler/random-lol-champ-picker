@@ -17,12 +17,6 @@ const champsList = [
   },
 ];
 
-const randomChamps = [];
-
-for (let i = 1; i <= 3; i++) {
-  randomChampPicker(randomChamps);
-}
-
 const runeTrees = [
   {
     name: "A",
@@ -59,6 +53,13 @@ const stats = [
   ["A", "B", "C"],
 ];
 
+const randomChamps = [];
+let userChamp = null;
+
+for (let i = 1; i <= 3; i++) {
+  randomChampPicker(randomChamps);
+}
+
 function randomChampPicker(arr) {
   let randomChamp = champsList[randomNumber(champsList)].name;
   if (arr.includes(randomChamp)) {
@@ -70,4 +71,28 @@ function randomChampPicker(arr) {
 
 function randomNumber(arr) {
   return Math.floor(Math.random() * arr.length);
+}
+
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+askQuestion();
+
+function askQuestion() {
+  rl.question(
+    `Your champs are ${randomChamps.join(", ")} please pick one. \n`,
+    function (answer) {
+      if (randomChamps.includes(answer)) {
+        userChamp = answer;
+        console.log(`You picked ${userChamp} and this are your runes \n`);
+        rl.close();
+      } else {
+        console.error("Please check for a typo");
+        askQuestion();
+      }
+    }
+  );
 }
