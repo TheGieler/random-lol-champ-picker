@@ -5,7 +5,7 @@ const champsList = [
   },
   {
     name: "Riven",
-    rolls: ["Fighter"],
+    rolls: ["Fighter", "Assasin"],
   },
   {
     name: "Olaf",
@@ -26,6 +26,7 @@ const runeTrees = [
       ["A", "B", "C"],
       ["A", "B", "C"],
     ],
+    roles: ["Fighter"],
   },
   {
     name: "B",
@@ -35,6 +36,7 @@ const runeTrees = [
       ["A", "B", "C"],
       ["A", "B", "C"],
     ],
+    roles: ["Mage", "Assasin"],
   },
   {
     name: "C",
@@ -44,6 +46,7 @@ const runeTrees = [
       ["A", "B", "C"],
       ["A", "B", "C"],
     ],
+    roles: ["Tank"],
   },
 ];
 
