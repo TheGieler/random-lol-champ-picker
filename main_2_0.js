@@ -17,6 +17,14 @@ const champsList = [
   },
 ];
 
+const randomChamps = [];
+
+for (let i = 1; i <= 3; i++) {
+  let champName = champsList[randomNumber(champsList)].name;
+  randomChamps.push(champName);
+  console.log(randomChamps);
+}
+
 const runeTrees = [
   {
     name: "A",
