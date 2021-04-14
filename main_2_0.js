@@ -52,3 +52,7 @@ const stats = [
   ["A", "B", "C"],
   ["A", "B", "C"],
 ];
+
+function randomNumber(arr) {
+  return Math.floor(Math.random() * arr.length);
+}
