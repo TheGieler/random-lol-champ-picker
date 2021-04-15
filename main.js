@@ -1,3 +1,5 @@
+// Data
+
 const champsList = [
   {
     name: "Annie",
@@ -36,7 +38,7 @@ const runeTrees = [
       ["A", "B", "C"],
       ["A", "B", "C"],
     ],
-    roles: ["Mage", "Assasin"],
+    roles: ["Mage", "Assassin"],
   },
   {
     name: "C",
@@ -56,18 +58,30 @@ const stats = [
   ["A", "B", "C"],
 ];
 
+// Variablen
+
+let userChamp = null;
+
 const randomChamps = [];
 const randomStats = [];
+
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+// Loops
 
 for (let i = 0; i <= 2; i++) {
   randomStats.push(stats[i][randomNumber(stats)]);
 }
 
-let userChamp = null;
-
 for (let i = 1; i <= 3; i++) {
   randomChampPicker(randomChamps);
 }
+
+// Functions
 
 function randomChampPicker(arr) {
   let randomChamp = champsList[randomNumber(champsList)].name;
@@ -82,11 +96,7 @@ function randomNumber(arr) {
   return Math.floor(Math.random() * arr.length);
 }
 
-// const readline = require("readline");
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout,
-// });
+// Start
 
 // askQuestion();
 
