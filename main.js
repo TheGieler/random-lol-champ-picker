@@ -65,11 +65,11 @@ let userChamp = null;
 const randomChamps = [];
 const randomStats = [];
 
-const readline = require("readline");
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+// const readline = require("readline");
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// });
 
 // Loops
 
@@ -115,3 +115,15 @@ function randomNumber(arr) {
 //     }
 //   );
 // }
+
+// Testbereich
+
+primaryTree = null;
+primaryTree = randomNumber(runeTrees);
+randomPrimaryRunes = [];
+
+for (let i = 0; i <= 3; i++) {
+  randomPrimaryRunes.push(
+    runeTrees[primaryTree].rows[i][randomNumber(runeTrees[primaryTree].rows[i])]
+  );
+}
