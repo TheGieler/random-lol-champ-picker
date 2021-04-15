@@ -84,7 +84,7 @@ for (let i = 1; i <= 3; i++) {
 // Functions
 
 function randomChampPicker(arr) {
-  let randomChamp = champsList[randomNumber(champsList)].name;
+  let randomChamp = champsList[randomNumber(champsList)];
   if (arr.includes(randomChamp)) {
     randomChampPicker(randomChamps);
   } else {
@@ -126,4 +126,31 @@ for (let i = 0; i <= 3; i++) {
   randomPrimaryRunes.push(
     runeTrees[primaryTree].rows[i][randomNumber(runeTrees[primaryTree].rows[i])]
   );
+}
+
+SecondaryTree = null;
+randomSecondaryRunes = [];
+randomSecondaryTree();
+
+function randomSecondaryTree() {
+  SecondaryTree = randomNumber(runeTrees);
+  if (SecondaryTree === primaryTree) {
+    randomSecondaryTree();
+  }
+}
+
+for (let i = 0; i <= 1; i++) {
+  randomSecondaryRunes.push(
+    runeTrees[SecondaryTree].rows[i][
+      randomNumber(runeTrees[SecondaryTree].rows[i])
+    ]
+  );
+}
+
+function rollCheck() {
+  if (
+    runeTrees[primaryTree].rolls.includes(champsList[randomChampIndex].rolls)
+  ) {
+    rollCheck();
+  }
 }
