@@ -57,6 +57,12 @@ const stats = [
 ];
 
 const randomChamps = [];
+const randomStats = [];
+
+for (let i = 0; i <= 2; i++) {
+  randomStats.push(stats[i][randomNumber(stats)]);
+}
+
 let userChamp = null;
 
 for (let i = 1; i <= 3; i++) {
@@ -76,26 +82,26 @@ function randomNumber(arr) {
   return Math.floor(Math.random() * arr.length);
 }
 
-const readline = require("readline");
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+// const readline = require("readline");
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// });
 
-askQuestion();
+// askQuestion();
 
-function askQuestion() {
-  rl.question(
-    `Your champs are ${randomChamps.join(", ")} please pick one. \n`,
-    function (answer) {
-      if (randomChamps.includes(answer)) {
-        userChamp = answer;
-        console.log(`You picked ${userChamp} and this are your runes \n`);
-        rl.close();
-      } else {
-        console.error("Please check for a typo");
-        askQuestion();
-      }
-    }
-  );
-}
+// function askQuestion() {
+//   rl.question(
+//     `Your champs are ${randomChamps.join(", ")} please pick one. \n`,
+//     function (answer) {
+//       if (randomChamps.includes(answer)) {
+//         userChamp = answer;
+//         console.log(`You picked ${userChamp} and this are your runes \n`);
+//         rl.close();
+//       } else {
+//         console.error("Please check for a typo");
+//         askQuestion();
+//       }
+//     }
+//   );
+// }
