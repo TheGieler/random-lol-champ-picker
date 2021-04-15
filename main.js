@@ -20,8 +20,8 @@ const champsList = [
 const runeTrees = [
   {
     name: "A",
-    keyRune: ["A", "B", "C", "D"],
-    minorRuneRows: [
+    rows: [
+      ["A", "B", "C", "D"],
       ["A", "B", "C"],
       ["A", "B", "C"],
       ["A", "B", "C"],
@@ -30,8 +30,8 @@ const runeTrees = [
   },
   {
     name: "B",
-    keyRune: ["A", "B", "C", "D"],
-    minorRuneRows: [
+    rows: [
+      ["A", "B", "C", "D"],
       ["A", "B", "C"],
       ["A", "B", "C"],
       ["A", "B", "C"],
@@ -40,8 +40,8 @@ const runeTrees = [
   },
   {
     name: "C",
-    keyRune: ["A", "B", "C"],
-    minorRuneRows: [
+    rows: [
+      ["A", "B", "C"],
       ["A", "B", "C"],
       ["A", "B", "C"],
       ["A", "B", "C"],
