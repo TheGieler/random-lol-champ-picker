@@ -1,71 +1,215 @@
-const champList = [
-  "Annie",
-  "Rammus",
-  "Darius",
-  "Diana",
-  "Leona",
-  "Maokai",
-  "Ivern",
-  "Rengar",
+// Data
+
+const champsList = [
+  {
+    name: "Annie",
+    roles: ["Mage"],
+  },
+  {
+    name: "Riven",
+    roles: ["Fighter", "Assasin"],
+  },
+  {
+    name: "Olaf",
+    roles: ["Tank", "Fighter"],
+  },
+  {
+    name: "Galio",
+    roles: ["Mage", "Tank"],
+  },
 ];
 
-console.log("Deine Random Champs sind:");
-
-for (let i = 1; i <= 3; i++) {
-  let randomNumber = null;
-  randomNumber = Math.floor(Math.random() * champList.length);
-  console.log(champList[randomNumber]);
-  champList.splice(randomNumber, 1);
-}
-
-const Trees = [
-  [
-    ["Fokusierter Angriff", "Tödliches Tempo", "Leichtfüssigkeit", "Eroberer"],
-    ["Überheilen", "Triumph", "Geistesgegenwart"],
-    ["Legende: Eifer", "Legende: Zähigkeit", "Legende: Blutdurst"],
-    ["Gnadentoss", "Niedermäher", "Letztes Gefecht"],
-  ],
-  [
-    ["Benefee Beschwörung", "Akaner Komet", "Phasenrausch"],
-    ["Kugel der Aufhebung", "Manafluss", "Nimbus-Umhang"],
-    ["Überlegenheit", "Flinkheit", "Absuluter Fokus"],
-    ["Hitzewelle", "Wasserlauf", "Aufziehender Sturm"],
-  ],
+const runeTrees = [
+  {
+    name: "A",
+    rows: [
+      ["A", "B", "C", "D"],
+      ["A", "B", "C"],
+      ["A", "B", "C"],
+      ["A", "B", "C"],
+    ],
+    roles: ["Fighter"],
+  },
+  {
+    name: "B",
+    rows: [
+      ["A", "B", "C", "D"],
+      ["A", "B", "C"],
+      ["A", "B", "C"],
+      ["A", "B", "C"],
+    ],
+    roles: ["Mage", "Assassin"],
+  },
+  {
+    name: "C",
+    rows: [
+      ["A", "B", "C"],
+      ["A", "B", "C"],
+      ["A", "B", "C"],
+      ["A", "B", "C"],
+    ],
+    roles: ["Tank"],
+  },
 ];
-
-console.log("Das sind deine Runen:");
-
-let randomMainTree = null;
-randomMainTree = Math.floor(Math.random() * Trees.length);
-
-for (let i = 0; i <= 3; i++) {
-  randomMainRune = null;
-  runeLenght = Trees[randomMainTree][i].length;
-  randomMainRune = Math.floor(Math.random() * runeLenght);
-  console.log(Trees[randomMainTree][i][randomMainRune]);
-}
-
-console.log("Das sind deine Subrunen:");
-
-let runesSub = null;
-runesSub = Math.floor(Math.random() * Trees.length);
-
-for (let i = 0; i <= 1; i++) {
-  randomSubMinor = null;
-  randomSubMinor = Math.floor(Math.random() * 3);
-  console.log(Trees[runesSub][i][randomSubMinor]);
-}
 
 const stats = [
-  ["AD/AP", "Attack Speed", "Ability Haste"],
-  ["AD/AP", "Armor", "Magic Resist"],
-  ["Life", "Armor", "Magic Resist"],
+  ["A", "B", "C"],
+  ["A", "B", "C"],
+  ["A", "B", "C"],
 ];
 
-console.log("Deine Random Stats sind:");
+// Variablen
+
+let userChampInput = null;
+
+let userChampObject = null;
+
+let userChampIndex = null;
+
+const randomChamps = [];
+const randomChampsName = [];
+const randomStats = [];
+
+let primaryTree = null;
+const randomPrimaryRunes = [];
+
+let secondaryTree = null;
+const randomSecondaryRunes = [];
+
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+// Loops
+
+for (let i = 1; i <= 3; i++) {
+  randomChampPicker(randomChamps);
+}
 
 for (let i = 0; i <= 2; i++) {
-  let randomNumber = null;
-  randomNumber = Math.floor(Math.random() * 3);
-  console.log(stats[i][randomNumber]);
+  randomStats.push(stats[i][randomNumber(stats)]);
 }
+
+for (let i = 0; i <= 2; i++) {
+  randomChampsName.push(randomChamps[i].name);
+}
+
+// Start
+
+askQuestion();
+
+function askQuestion() {
+  rl.question(
+    `Your champs are ${randomChampsName.join(", ")} please pick one. \n`,
+    function (answer) {
+      if (randomChampsName.includes(answer)) {
+        userChampInput = answer;
+        console.log(`You picked ${userChampInput} and this are your runes \n`);
+        userChampObject = champsList.find(
+          (champ) => champ.name === userChampInput
+        );
+        userChampIndex = champsList.findIndex((champ) => {
+          return champ.name === userChampInput;
+        });
+
+        randomPrimaryTree();
+
+        console.log(`Your runetree ${runeTrees[primaryTree].name}`);
+
+        for (let i = 0; i <= 3; i++) {
+          randomPrimaryRunes.push(
+            runeTrees[primaryTree].rows[i][
+              randomNumber(runeTrees[primaryTree].rows[i])
+            ]
+          );
+        }
+
+        console.log(` ${randomPrimaryRunes}  \n \n`);
+
+        randomSecondaryTree();
+
+        for (let i = 0; i <= 1; i++) {
+          randomSecondaryRunes.push(
+            runeTrees[secondaryTree].rows[i][
+              randomNumber(runeTrees[secondaryTree].rows[i])
+            ]
+          );
+        }
+
+        console.log(` ${randomSecondaryRunes}  \n`);
+
+        console.log(`Also your random stats are \n \n ${randomStats} \n \n`);
+
+        rl.close();
+      } else {
+        console.error("Please check for a typo");
+        askQuestion();
+      }
+    }
+  );
+}
+
+// Functions
+
+function randomChampPicker(arr) {
+  let randomChamp = champsList[randomNumber(champsList)];
+  if (arr.includes(randomChamp)) {
+    randomChampPicker(randomChamps);
+  } else {
+    randomChamps.push(randomChamp);
+  }
+}
+
+function randomNumber(arr) {
+  return Math.floor(Math.random() * arr.length);
+}
+
+function randomPrimaryTree() {
+  primaryTree = randomNumber(runeTrees);
+  roleCheck(primaryTree, randomPrimaryTree);
+}
+
+function randomSecondaryTree() {
+  secondaryTree = randomNumber(runeTrees);
+  if (secondaryTree === primaryTree) {
+    randomSecondaryTree();
+  }
+}
+
+function roleCheck(tree, func) {
+  const runeRoles = runeTrees[tree].roles;
+  const champRoles = champsList[userChampIndex].roles;
+
+  if (champRoles.some((champRole) => runeRoles.includes(champRole))) {
+    func();
+  }
+}
+
+// Lang
+
+// const runeRoles = runeTrees[0].roles;
+// const champRoles = champsList[0].roles;
+
+// function checkRole(func) {
+//   for (let i = 0; i < champRoles.length; i++) {
+//     const champRole = champRoles[i];
+
+//     for (let j = 0; j < runeRoles.length; j++) {
+//       const runeRole = runeRoles[j];
+
+//       if (champRole === runeRole) {
+//         func();
+//       }
+//     }
+//   }
+// }
+
+// Kurz
+
+// const champRoles = champsList[0].roles;
+
+// const champHasMatchingRunes3 = champRoles.some((champRole) =>
+//   runeRoles.includes(champRole)
+// );
