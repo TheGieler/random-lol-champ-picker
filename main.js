@@ -68,6 +68,13 @@ const rl = readline.createInterface({
 
 const ask = (question) =>
   new Promise((resolve) => rl.question(question, resolve));
+
+const askForPlayers = async () => {
+  const playerCount = await ask(
+    "Please pick your player count! 1-3 Players allowed! \n"
+  );
+  console.log(playerCount);
+};
 // Start
 
 function askQuestion() {
