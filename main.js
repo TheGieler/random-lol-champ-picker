@@ -60,45 +60,13 @@ const stats = [
 
 // Variablen
 
-let userChampInput = null;
-
-let userChampObject = null;
-
-let userChampIndex = null;
-
-const randomChamps = [];
-const randomChampsName = [];
-const randomStats = [];
-
-let primaryTree = null;
-const randomPrimaryRunes = [];
-
-let secondaryTree = null;
-const randomSecondaryRunes = [];
-
 const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-// Loops
-
-for (let i = 1; i <= 3; i++) {
-  randomChampPicker(randomChamps);
-}
-
-for (let i = 0; i <= 2; i++) {
-  randomStats.push(stats[i][randomNumber(stats)]);
-}
-
-for (let i = 0; i <= 2; i++) {
-  randomChampsName.push(randomChamps[i].name);
-}
-
 // Start
-
-askQuestion();
 
 function askQuestion() {
   rl.question(
@@ -150,66 +118,3 @@ function askQuestion() {
     }
   );
 }
-
-// Functions
-
-function randomChampPicker(arr) {
-  let randomChamp = champsList[randomNumber(champsList)];
-  if (arr.includes(randomChamp)) {
-    randomChampPicker(randomChamps);
-  } else {
-    randomChamps.push(randomChamp);
-  }
-}
-
-function randomNumber(arr) {
-  return Math.floor(Math.random() * arr.length);
-}
-
-function randomPrimaryTree() {
-  primaryTree = randomNumber(runeTrees);
-  roleCheck(primaryTree, randomPrimaryTree);
-}
-
-function randomSecondaryTree() {
-  secondaryTree = randomNumber(runeTrees);
-  if (secondaryTree === primaryTree) {
-    randomSecondaryTree();
-  }
-}
-
-function roleCheck(tree, func) {
-  const runeRoles = runeTrees[tree].roles;
-  const champRoles = champsList[userChampIndex].roles;
-
-  if (champRoles.some((champRole) => runeRoles.includes(champRole))) {
-    func();
-  }
-}
-
-// Lang
-
-// const runeRoles = runeTrees[0].roles;
-// const champRoles = champsList[0].roles;
-
-// function checkRole(func) {
-//   for (let i = 0; i < champRoles.length; i++) {
-//     const champRole = champRoles[i];
-
-//     for (let j = 0; j < runeRoles.length; j++) {
-//       const runeRole = runeRoles[j];
-
-//       if (champRole === runeRole) {
-//         func();
-//       }
-//     }
-//   }
-// }
-
-// Kurz
-
-// const champRoles = champsList[0].roles;
-
-// const champHasMatchingRunes3 = champRoles.some((champRole) =>
-//   runeRoles.includes(champRole)
-// );
