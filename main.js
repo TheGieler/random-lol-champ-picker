@@ -83,5 +83,5 @@ const askForPlayers = async () => {
   }
 };
 
-const main = () => {};
+const main = async () => {};
 main();
