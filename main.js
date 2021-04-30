@@ -85,5 +85,10 @@ const askForPlayers = async () => {
   }
 };
 
+const randomChampGenerator = () => {
+  let randomChamp = champsList[randomNumber(champsList.length)];
+  return randomChamp;
+};
+
 const main = async () => {};
 main();
