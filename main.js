@@ -71,6 +71,8 @@ const rl = readline.createInterface({
 const ask = (question) =>
   new Promise((resolve) => rl.question(question, resolve));
 
+const randomNumber = (num) => Math.floor(Math.random() * num);
+
 const askForPlayers = async () => {
   const playerCount = Number.parseInt(
     await ask("Please pick your player count! 1-3 Players allowed! \n")
