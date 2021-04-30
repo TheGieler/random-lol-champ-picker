@@ -73,7 +73,12 @@ const askForPlayers = async () => {
   const playerCount = await ask(
     "Please pick your player count! 1-3 Players allowed! \n"
   );
-  console.log(playerCount);
+  if (Number.isInteger(playerCount) && playerCount > 0 && playerCount < 4) {
+    return playerCount;
+  } else {
+    console.log("Please check your input \n");
+    return await askForPlayers();
+  }
 };
 
 const main = () => {};
