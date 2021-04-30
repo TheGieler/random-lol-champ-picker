@@ -70,8 +70,8 @@ const ask = (question) =>
   new Promise((resolve) => rl.question(question, resolve));
 
 const askForPlayers = async () => {
-  const playerCount = await ask(
-    "Please pick your player count! 1-3 Players allowed! \n"
+  const playerCount = Number.parseInt(
+    await ask("Please pick your player count! 1-3 Players allowed! \n")
   );
   if (Number.isInteger(playerCount) && playerCount > 0 && playerCount < 4) {
     return playerCount;
