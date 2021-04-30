@@ -75,6 +75,10 @@ const askForPlayers = async () => {
   );
   console.log(playerCount);
 };
+
+const main = () => {};
+main();
+
 // Start
 
 function askQuestion() {
