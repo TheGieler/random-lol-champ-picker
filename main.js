@@ -85,6 +85,22 @@ const askForPlayers = async () => {
   }
 };
 
+const createPlayerData = (playerCount) => {
+  let playersData = [];
+  for (let i = 1; i <= playerCount; i++) {
+    let playerDataObject = {
+      playerNumber: `Player ${i}`,
+      selectedChamp: null,
+      primaryRuneTree: null,
+      primaryRunes: null,
+      secondaryRuneTree: null,
+      secondaryRunes: null,
+      stats: null,
+    };
+    playersData.push(playerDataObject);
+  }
+};
+
 const randomChampGenerator = () => {
   let randomChamp = champsList[randomNumber(champsList.length)];
   return randomChamp;
