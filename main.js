@@ -107,5 +107,9 @@ const randomChampGenerator = () => {
   return randomChamp;
 };
 
-const main = async () => {};
+const main = async () => {
+  const playerCount = await askForPlayers();
+  const playersData = await createPlayerData(playerCount);
+  console.log(playersData);
+};
 main();
