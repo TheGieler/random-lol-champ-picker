@@ -90,13 +90,13 @@ const createPlayerData = (playerCount) => {
   for (let i = 1; i <= playerCount; i++) {
     let playerDataObject = {
       playerNumber: `Player ${i}`,
-      randomChamps: null,
+      randomChamps: [],
       selectedChamp: null,
       primaryRuneTree: null,
-      primaryRunes: null,
+      primaryRunes: [],
       secondaryRuneTree: null,
-      secondaryRunes: null,
-      stats: null,
+      secondaryRunes: [],
+      stats: [],
     };
     playersData.push(playerDataObject);
   }
