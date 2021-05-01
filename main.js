@@ -90,6 +90,7 @@ const createPlayerData = (playerCount) => {
   for (let i = 1; i <= playerCount; i++) {
     let playerDataObject = {
       playerNumber: `Player ${i}`,
+      randomChamps: null,
       selectedChamp: null,
       primaryRuneTree: null,
       primaryRunes: null,
