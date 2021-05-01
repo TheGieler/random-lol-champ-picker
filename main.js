@@ -75,9 +75,9 @@ const randomNumber = (num) => Math.floor(Math.random() * num);
 
 const askForPlayers = async () => {
   const playerCount = Number.parseInt(
-    await ask("Please pick your player count! 1-3 Players allowed! \n")
+    await ask("Please pick your player count! 1-2 Players allowed! \n")
   );
-  if (Number.isInteger(playerCount) && playerCount > 0 && playerCount < 4) {
+  if (Number.isInteger(playerCount) && playerCount > 0 && playerCount < 3) {
     return playerCount;
   } else {
     console.log("Please check your input \n");
