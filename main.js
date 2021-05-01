@@ -99,6 +99,7 @@ const createPlayerData = (playerCount) => {
     };
     playersData.push(playerDataObject);
   }
+  return playersData;
 };
 
 const randomChampGenerator = () => {
