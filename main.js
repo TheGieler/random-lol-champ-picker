@@ -108,6 +108,18 @@ const randomChampGenerator = () => {
   return randomChamp;
 };
 
+const createRandomChampsArray = (i, currentPlayer) => {
+  const randomChamp = randomChampGenerator();
+  if (currentPlayer.randomChamps.find((a) => a.name === randomChamp.name)) {
+    createRandomChampsArray(i, currentPlayer);
+  } else {
+    currentPlayer.randomChamps.push(randomChamp);
+    if (currentPlayer.randomChamps.length < 3) {
+      createRandomChampsArray(i, currentPlayer);
+    }
+  }
+};
+
 const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = await createPlayerData(playerCount);
