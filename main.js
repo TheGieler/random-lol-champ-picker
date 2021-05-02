@@ -122,7 +122,9 @@ const createRandomChampsArray = (i, currentPlayer) => {
 
 const main = async () => {
   const playerCount = await askForPlayers();
-  const playersData = await createPlayerData(playerCount);
-  console.log(playersData);
+  const playersData = createPlayerData(playerCount);
+  for (let i = 0; i < playerCount; i++) {
+    createRandomChampsArray(i, playersData[i]);
+  }
 };
 main();
