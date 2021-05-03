@@ -127,8 +127,11 @@ const askForChamp = async (i, currentPlayer) => {
   const userInput = await ask(
     `Your randoms champs are ${randomChampNames} please pick one! \n`
   );
-  if (randomChampsArray.find((c) => c === userInput)) {
-    currentPlayer.selectedChamp = userInput;
+  if (currentPlayer.randomChamps.find((c) => c.name === userInput)) {
+    const selectedChamp = currentPlayer.randomChamps.find(
+      (c) => c.name === userInput
+    );
+    currentPlayer.selectedChamp = selectedChamp;
   } else {
     console.log("Please check your input! \n");
     return await askForChamp(i, currentPlayer);
