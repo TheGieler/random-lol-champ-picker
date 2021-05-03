@@ -120,6 +120,21 @@ const createRandomChampsArray = (i, currentPlayer) => {
   }
 };
 
+const askForChamp = async (i, currentPlayer) => {
+  const randomChampsArray = [];
+  currentPlayer.randomChamps.forEach((c) => randomChampsArray.push(c.name));
+  const randomChampNames = randomChampsArray.join(", ");
+  const userInput = await ask(
+    `Your randoms champs are ${randomChampNames} please pick one! \n`
+  );
+  if (randomChampsArray.find((c) => c === userInput)) {
+    currentPlayer.selectedChamp = userInput;
+  } else {
+    console.log("Please check your input! \n");
+    return await askForChamp(i, currentPlayer);
+  }
+};
+
 const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = createPlayerData(playerCount);
