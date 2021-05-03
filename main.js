@@ -152,6 +152,12 @@ const checkRoles = (i, currentPlayer) => {
   }
 };
 
+const pickPrimaryRunes = (i, currentPlayer) => {
+  const primaryRuneTree = currentPlayer.primaryRuneTree.rows;
+  const primaryRunes = currentPlayer.primaryRunes;
+  primaryRuneTree.forEach((r) => primaryRunes.push(r[randomNumber(r.length)]));
+};
+
 const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = createPlayerData(playerCount);
@@ -159,6 +165,7 @@ const main = async () => {
     createRandomChampsArray(i, playersData[i]);
     await askForChamp(i, playersData[i]);
     selectPrimaryRuneTree(i, playersData[i]);
+    pickPrimaryRunes(i, playersData[i]);
 
     console.log(playersData);
   }
