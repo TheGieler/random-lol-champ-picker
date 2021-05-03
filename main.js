@@ -168,6 +168,15 @@ const selectSecondaryRuneTree = (i, currentPlayer) => {
   }
 };
 
+const pickSecondaryRunes = (i, currentPlayer) => {
+  const secondaryTree = currentPlayer.secondaryRuneTree.rows;
+  for (let i = 0; i < 2; i++) {
+    currentPlayer.secondaryRunes.push(
+      secondaryTree[randomNumber(secondaryTree.length)][randomNumber(3)]
+    );
+  }
+};
+
 const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = createPlayerData(playerCount);
@@ -177,6 +186,7 @@ const main = async () => {
     selectPrimaryRuneTree(i, playersData[i]);
     pickPrimaryRunes(i, playersData[i]);
     selectSecondaryRuneTree(i, playersData[i]);
+    pickSecondaryRunes(i, playersData[i]);
 
     console.log(playersData);
   }
