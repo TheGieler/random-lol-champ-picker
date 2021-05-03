@@ -158,6 +158,16 @@ const pickPrimaryRunes = (i, currentPlayer) => {
   primaryRuneTree.forEach((r) => primaryRunes.push(r[randomNumber(r.length)]));
 };
 
+const selectSecondaryRuneTree = (i, currentPlayer) => {
+  const primaryRuneTree = currentPlayer.primaryRuneTree.name;
+  const secondaryTree = runeTrees[randomNumber(runeTrees.length)];
+  if (primaryRuneTree === secondaryTree.name) {
+    selectSecondaryRuneTree(i, currentPlayer);
+  } else {
+    currentPlayer.secondaryRuneTree = secondaryTree;
+  }
+};
+
 const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = createPlayerData(playerCount);
@@ -166,6 +176,7 @@ const main = async () => {
     await askForChamp(i, playersData[i]);
     selectPrimaryRuneTree(i, playersData[i]);
     pickPrimaryRunes(i, playersData[i]);
+    selectSecondaryRuneTree(i, playersData[i]);
 
     console.log(playersData);
   }
