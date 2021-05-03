@@ -141,7 +141,17 @@ const askForChamp = async (i, currentPlayer) => {
 const selectPrimaryRuneTree = (i, currentPlayer) => {
   const primaryTree = runeTrees[randomNumber(runeTrees.length)];
   currentPlayer.primaryRuneTree = primaryTree;
+  checkRoles(i, currentPlayer);
 };
+
+const checkRoles = (i, currentPlayer) => {
+  const champ = currentPlayer.selectedChamp;
+  const primaryRuneTree = currentPlayer.primaryRuneTree;
+  if (champ.roles.some((a) => primaryRuneTree.roles.includes(a))) {
+    selectPrimaryRuneTree(i, currentPlayer);
+  }
+};
+
 const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = createPlayerData(playerCount);
