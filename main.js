@@ -138,6 +138,10 @@ const askForChamp = async (i, currentPlayer) => {
   }
 };
 
+const selectPrimaryRuneTree = (i, currentPlayer) => {
+  const primaryTree = runeTrees[randomNumber(runeTrees.length)];
+  currentPlayer.primaryRuneTree = primaryTree;
+};
 const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = createPlayerData(playerCount);
