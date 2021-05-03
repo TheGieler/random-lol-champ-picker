@@ -159,6 +159,8 @@ const main = async () => {
     createRandomChampsArray(i, playersData[i]);
     await askForChamp(i, playersData[i]);
     selectPrimaryRuneTree(i, playersData[i]);
+
+    console.log(playersData);
   }
 };
 main();
