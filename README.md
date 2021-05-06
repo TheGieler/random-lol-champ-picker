@@ -1,2 +1,2 @@
-# y-match-js-rebuilt-clone
-# y-match-js-rebuilt-clone
+# random-lol-champ-picker
+# random-lol-champ-picker
