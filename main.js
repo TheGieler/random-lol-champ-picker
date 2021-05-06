@@ -182,6 +182,21 @@ const pickStats = (i, currentPlayer) => {
   stats.forEach((s) => playerStats.push(s[randomNumber(3)]));
 };
 
+const displayPlayerData = (i, currentPlayer) => {
+  console.log(`
+${currentPlayer.playerNumber} are your runes \n
+Your primary rune tree is ${currentPlayer.primaryRuneTree.name}
+The runes are:
+${currentPlayer.primaryRunes.join(", ")} \n
+Your secondary rune tree is ${currentPlayer.primaryRuneTree.name}
+The runes are:
+${currentPlayer.secondaryRunes.join(", ")} \n
+Your stats are:
+${currentPlayer.stats.join(", ")} \n
+Enjoy! \n
+  `);
+};
+
 const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = createPlayerData(playerCount);
@@ -193,8 +208,7 @@ const main = async () => {
     selectSecondaryRuneTree(i, playersData[i]);
     pickSecondaryRunes(i, playersData[i]);
     pickStats(i, playersData[i]);
-
-    console.log(playersData);
+    displayPlayerData(i, playersData[i]);
   }
 };
 main();
