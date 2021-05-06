@@ -177,6 +177,11 @@ const pickSecondaryRunes = (i, currentPlayer) => {
   }
 };
 
+const pickStats = (i, currentPlayer) => {
+  const playerStats = currentPlayer.stats;
+  stats.forEach((s) => playerStats.push(s[randomNumber(3)]));
+};
+
 const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = createPlayerData(playerCount);
@@ -187,6 +192,7 @@ const main = async () => {
     pickPrimaryRunes(i, playersData[i]);
     selectSecondaryRuneTree(i, playersData[i]);
     pickSecondaryRunes(i, playersData[i]);
+    pickStats(i, playersData[i]);
 
     console.log(playersData);
   }
