@@ -7,7 +7,7 @@ const champsList = [
   },
   {
     name: "Riven",
-    roles: ["Fighter", "Assasin"],
+    roles: ["Fighter", "Assassin"],
   },
   {
     name: "Olaf",
