@@ -124,14 +124,18 @@ const randomChampGenerator = () => {
   return randomChamp;
 };
 
-const createRandomChampsArray = (i, currentPlayer) => {
+const createRandomChampsArray = (i, playersData, currentPlayer) => {
   const randomChamp = randomChampGenerator();
   if (currentPlayer.randomChamps.find((a) => a.name === randomChamp.name)) {
-    createRandomChampsArray(i, currentPlayer);
+    createRandomChampsArray(i, playersData, currentPlayer);
+  } else if (
+    playersData.find((p) => p.selectedChamp.name === randomChamp.name)
+  ) {
+    createRandomChampsArray(i, playersData, currentPlayer);
   } else {
     currentPlayer.randomChamps.push(randomChamp);
     if (currentPlayer.randomChamps.length < 3) {
-      createRandomChampsArray(i, currentPlayer);
+      createRandomChampsArray(i, playersData, currentPlayer);
     }
   }
 };
@@ -217,7 +221,7 @@ const main = async () => {
   const playerCount = await askForPlayers();
   const playersData = createPlayerData(playerCount);
   for (let i = 0; i < playerCount; i++) {
-    createRandomChampsArray(i, playersData[i]);
+    createRandomChampsArray(i, playersData, playersData[i]);
     await askForChamp(i, playersData[i]);
     selectPrimaryRuneTree(i, playersData[i]);
     pickPrimaryRunes(i, playersData[i]);
