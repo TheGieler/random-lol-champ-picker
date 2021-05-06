@@ -17,6 +17,22 @@ const champsList = [
     name: "Galio",
     roles: ["Mage", "Tank"],
   },
+  {
+    name: "Ekko",
+    roles: ["Mage", "Assassin"],
+  },
+  {
+    name: "Evelynn",
+    roles: ["Assassin", "Mage"],
+  },
+  {
+    name: "Leona",
+    roles: ["Support", "Tank"],
+  },
+  {
+    name: "Soraka",
+    roles: ["Support"],
+  },
 ];
 
 const runeTrees = [
