@@ -7,7 +7,7 @@ const champsList = [
   },
   {
     name: "Riven",
-    roles: ["Fighter", "Assasin"],
+    roles: ["Fighter", "Assassin"],
   },
   {
     name: "Olaf",
@@ -16,6 +16,22 @@ const champsList = [
   {
     name: "Galio",
     roles: ["Mage", "Tank"],
+  },
+  {
+    name: "Ekko",
+    roles: ["Mage", "Assassin"],
+  },
+  {
+    name: "Evelynn",
+    roles: ["Assassin", "Mage"],
+  },
+  {
+    name: "Leona",
+    roles: ["Support", "Tank"],
+  },
+  {
+    name: "Soraka",
+    roles: ["Support"],
   },
 ];
 
@@ -60,156 +76,159 @@ const stats = [
 
 // Variablen
 
-let userChampInput = null;
-
-let userChampObject = null;
-
-let userChampIndex = null;
-
-const randomChamps = [];
-const randomChampsName = [];
-const randomStats = [];
-
-let primaryTree = null;
-const randomPrimaryRunes = [];
-
-let secondaryTree = null;
-const randomSecondaryRunes = [];
-
 const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-// Loops
+//Functions
 
-for (let i = 1; i <= 3; i++) {
-  randomChampPicker(randomChamps);
-}
+const ask = (question) =>
+  new Promise((resolve) => rl.question(question, resolve));
 
-for (let i = 0; i <= 2; i++) {
-  randomStats.push(stats[i][randomNumber(stats)]);
-}
+const randomNumber = (num) => Math.floor(Math.random() * num);
 
-for (let i = 0; i <= 2; i++) {
-  randomChampsName.push(randomChamps[i].name);
-}
-
-// Start
-
-askQuestion();
-
-function askQuestion() {
-  rl.question(
-    `Your champs are ${randomChampsName.join(", ")} please pick one. \n`,
-    function (answer) {
-      if (randomChampsName.includes(answer)) {
-        userChampInput = answer;
-        console.log(`You picked ${userChampInput} and this are your runes \n`);
-        userChampObject = champsList.find(
-          (champ) => champ.name === userChampInput
-        );
-        userChampIndex = champsList.findIndex((champ) => {
-          return champ.name === userChampInput;
-        });
-
-        randomPrimaryTree();
-
-        console.log(`Your runetree ${runeTrees[primaryTree].name}`);
-
-        for (let i = 0; i <= 3; i++) {
-          randomPrimaryRunes.push(
-            runeTrees[primaryTree].rows[i][
-              randomNumber(runeTrees[primaryTree].rows[i])
-            ]
-          );
-        }
-
-        console.log(` ${randomPrimaryRunes}  \n \n`);
-
-        randomSecondaryTree();
-
-        for (let i = 0; i <= 1; i++) {
-          randomSecondaryRunes.push(
-            runeTrees[secondaryTree].rows[i][
-              randomNumber(runeTrees[secondaryTree].rows[i])
-            ]
-          );
-        }
-
-        console.log(` ${randomSecondaryRunes}  \n`);
-
-        console.log(`Also your random stats are \n \n ${randomStats} \n \n`);
-
-        rl.close();
-      } else {
-        console.error("Please check for a typo");
-        askQuestion();
-      }
-    }
+const askForPlayers = async () => {
+  const playerCount = Number.parseInt(
+    await ask("Please pick your player count! 1-2 Players allowed! \n")
   );
-}
-
-// Functions
-
-function randomChampPicker(arr) {
-  let randomChamp = champsList[randomNumber(champsList)];
-  if (arr.includes(randomChamp)) {
-    randomChampPicker(randomChamps);
+  if (Number.isInteger(playerCount) && playerCount > 0 && playerCount < 3) {
+    return playerCount;
   } else {
-    randomChamps.push(randomChamp);
+    console.log("Please check your input \n");
+    return await askForPlayers();
   }
-}
+};
 
-function randomNumber(arr) {
-  return Math.floor(Math.random() * arr.length);
-}
-
-function randomPrimaryTree() {
-  primaryTree = randomNumber(runeTrees);
-  roleCheck(primaryTree, randomPrimaryTree);
-}
-
-function randomSecondaryTree() {
-  secondaryTree = randomNumber(runeTrees);
-  if (secondaryTree === primaryTree) {
-    randomSecondaryTree();
+const createPlayerData = (playerCount) => {
+  let playersData = [];
+  for (let i = 1; i <= playerCount; i++) {
+    let playerDataObject = {
+      playerNumber: `Player ${i}`,
+      randomChamps: [],
+      selectedChamp: "",
+      primaryRuneTree: null,
+      primaryRunes: [],
+      secondaryRuneTree: null,
+      secondaryRunes: [],
+      stats: [],
+    };
+    playersData.push(playerDataObject);
   }
-}
+  return playersData;
+};
 
-function roleCheck(tree, func) {
-  const runeRoles = runeTrees[tree].roles;
-  const champRoles = champsList[userChampIndex].roles;
+const randomChampGenerator = () => {
+  let randomChamp = champsList[randomNumber(champsList.length)];
+  return randomChamp;
+};
 
-  if (champRoles.some((champRole) => runeRoles.includes(champRole))) {
-    func();
+const createRandomChampsArray = (i, playersData, currentPlayer) => {
+  const randomChamp = randomChampGenerator();
+  if (currentPlayer.randomChamps.find((a) => a.name === randomChamp.name)) {
+    createRandomChampsArray(i, playersData, currentPlayer);
+  } else if (
+    playersData.find((p) => p.selectedChamp.name === randomChamp.name)
+  ) {
+    createRandomChampsArray(i, playersData, currentPlayer);
+  } else {
+    currentPlayer.randomChamps.push(randomChamp);
+    if (currentPlayer.randomChamps.length < 3) {
+      createRandomChampsArray(i, playersData, currentPlayer);
+    }
   }
-}
+};
 
-// Lang
+const askForChamp = async (i, currentPlayer) => {
+  const randomChampsArray = [];
+  currentPlayer.randomChamps.forEach((c) => randomChampsArray.push(c.name));
+  const randomChampNames = randomChampsArray.join(", ");
+  const userInput = await ask(
+    `${currentPlayer.playerNumber} your randoms champs are ${randomChampNames} please pick one! \n`
+  );
+  if (currentPlayer.randomChamps.find((c) => c.name === userInput)) {
+    const selectedChamp = currentPlayer.randomChamps.find(
+      (c) => c.name === userInput
+    );
+    currentPlayer.selectedChamp = selectedChamp;
+  } else {
+    console.log("Please check your input! \n");
+    return await askForChamp(i, currentPlayer);
+  }
+};
 
-// const runeRoles = runeTrees[0].roles;
-// const champRoles = champsList[0].roles;
+const selectPrimaryRuneTree = (i, currentPlayer) => {
+  const primaryTree = runeTrees[randomNumber(runeTrees.length)];
+  currentPlayer.primaryRuneTree = primaryTree;
+  checkRoles(i, currentPlayer);
+};
 
-// function checkRole(func) {
-//   for (let i = 0; i < champRoles.length; i++) {
-//     const champRole = champRoles[i];
+const checkRoles = (i, currentPlayer) => {
+  const champ = currentPlayer.selectedChamp;
+  const primaryRuneTree = currentPlayer.primaryRuneTree;
+  if (champ.roles.some((a) => primaryRuneTree.roles.includes(a))) {
+    selectPrimaryRuneTree(i, currentPlayer);
+  }
+};
 
-//     for (let j = 0; j < runeRoles.length; j++) {
-//       const runeRole = runeRoles[j];
+const pickPrimaryRunes = (i, currentPlayer) => {
+  const primaryRuneTree = currentPlayer.primaryRuneTree.rows;
+  const primaryRunes = currentPlayer.primaryRunes;
+  primaryRuneTree.forEach((r) => primaryRunes.push(r[randomNumber(r.length)]));
+};
 
-//       if (champRole === runeRole) {
-//         func();
-//       }
-//     }
-//   }
-// }
+const selectSecondaryRuneTree = (i, currentPlayer) => {
+  const primaryRuneTree = currentPlayer.primaryRuneTree.name;
+  const secondaryTree = runeTrees[randomNumber(runeTrees.length)];
+  if (primaryRuneTree === secondaryTree.name) {
+    selectSecondaryRuneTree(i, currentPlayer);
+  } else {
+    currentPlayer.secondaryRuneTree = secondaryTree;
+  }
+};
 
-// Kurz
+const pickSecondaryRunes = (i, currentPlayer) => {
+  const secondaryTree = currentPlayer.secondaryRuneTree.rows;
+  for (let i = 0; i < 2; i++) {
+    currentPlayer.secondaryRunes.push(
+      secondaryTree[randomNumber(secondaryTree.length)][randomNumber(3)]
+    );
+  }
+};
 
-// const champRoles = champsList[0].roles;
+const pickStats = (i, currentPlayer) => {
+  const playerStats = currentPlayer.stats;
+  stats.forEach((s) => playerStats.push(s[randomNumber(3)]));
+};
 
-// const champHasMatchingRunes3 = champRoles.some((champRole) =>
-//   runeRoles.includes(champRole)
-// );
+const displayPlayerData = (i, currentPlayer) => {
+  console.log(`
+${currentPlayer.playerNumber} are your runes \n
+Your primary rune tree is ${currentPlayer.primaryRuneTree.name}
+The runes are:
+${currentPlayer.primaryRunes.join(", ")} \n
+Your secondary rune tree is ${currentPlayer.primaryRuneTree.name}
+The runes are:
+${currentPlayer.secondaryRunes.join(", ")} \n
+Your stats are:
+${currentPlayer.stats.join(", ")} \n
+Enjoy! \n
+  `);
+};
+
+const main = async () => {
+  const playerCount = await askForPlayers();
+  const playersData = createPlayerData(playerCount);
+  for (let i = 0; i < playerCount; i++) {
+    createRandomChampsArray(i, playersData, playersData[i]);
+    await askForChamp(i, playersData[i]);
+    selectPrimaryRuneTree(i, playersData[i]);
+    pickPrimaryRunes(i, playersData[i]);
+    selectSecondaryRuneTree(i, playersData[i]);
+    pickSecondaryRunes(i, playersData[i]);
+    pickStats(i, playersData[i]);
+    displayPlayerData(i, playersData[i]);
+  }
+};
+main();
